@@ -17,6 +17,8 @@
 package org.jboss.errai.demos.cdi.lite.beans;
 
 import com.google.inject.Inject;
+import org.jboss.errai.demos.cdi.lite.beans.qualifiers.QualifiedWelcomeMessage;
+import org.jboss.errai.demos.cdi.lite.beans.qualifiers.WelcomeStringMessage;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Named;
@@ -38,26 +40,31 @@ public class WelcomeService {
   public WelcomeMessage messageWithQualifier2;
 
   @Inject
-  public RegularWelcomeMessage publicMessage;
+  public DependentWelcomeMessage publicMessage;
 
   private final WelcomeMessage privateMessage;
+  private final String stringMessage;
 
   @Inject
-  public WelcomeService(final RegularWelcomeMessage privateMessage) {
-    this.privateMessage = privateMessage;
+  public WelcomeService(final DependentWelcomeMessage privateDependentWelcomeMessage,
+                        final @WelcomeStringMessage String stringMessage) {
+
+    this.privateMessage = privateDependentWelcomeMessage;
+    this.stringMessage = stringMessage;
   }
 
   public void printWelcomeMessages() {
     System.out.println("Hello from CDI-Lite managed bean!");
-    System.out.println("");
+    System.out.println();
 
     System.out.println("Public " + decapitalize(publicMessage.text()));
     System.out.println("Private " + decapitalize(privateMessage.text()));
-    System.out.println("");
+    System.out.println();
 
     System.out.println(messageWithQualifier1.text());
     System.out.println(messageWithQualifier2.text());
-    System.out.println("");
+    System.out.println(stringMessage);
+    System.out.println();
   }
 
 }

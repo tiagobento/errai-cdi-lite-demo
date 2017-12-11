@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-package org.jboss.errai.demos.cdi.lite.beans;
+package org.jboss.errai.demos.cdi.lite.beans.qualifiers;
+
+import org.jboss.errai.demos.cdi.lite.beans.WelcomeMessage;
 
 /**
  * @author Tiago Bento <tfernand@redhat.com>

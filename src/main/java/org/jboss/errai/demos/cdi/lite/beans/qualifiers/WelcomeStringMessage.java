@@ -14,19 +14,16 @@
  * limitations under the License.
  */
 
-package org.jboss.errai.demos.cdi.lite.beans;
+package org.jboss.errai.demos.cdi.lite.beans.qualifiers;
 
-import javax.enterprise.context.Dependent;
+import javax.inject.Qualifier;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 /**
  * @author Tiago Bento <tfernand@redhat.com>
  */
-@Dependent
-public class RegularWelcomeMessage implements WelcomeMessage {
-
-  @Override
-  public String text() {
-    return "Hello from CDI-Lite regularly injected bean!";
-  }
-
+@Qualifier
+@Retention(RetentionPolicy.RUNTIME)
+public @interface WelcomeStringMessage {
 }

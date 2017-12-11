@@ -16,26 +16,17 @@
 
 package org.jboss.errai.demos.cdi.lite.beans;
 
-import org.jboss.errai.common.client.api.annotations.IOCProducer;
-
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Produces;
-import javax.inject.Named;
+import javax.enterprise.context.Dependent;
 
 /**
  * @author Tiago Bento <tfernand@redhat.com>
  */
-public class QualifiedWelcomeMessageProducer {
+@Dependent
+public class DependentWelcomeMessage implements WelcomeMessage {
 
-  @IOCProducer
-  @Named("welcomeMessage1")
-  public static QualifiedWelcomeMessage welcomeMessageWithQualifiers1() {
-    return new QualifiedWelcomeMessage("Hello from CDI-Lite qualified bean 1!");
+  @Override
+  public String text() {
+    return "Hello from CDI-Lite regular dependent bean!";
   }
 
-  @IOCProducer
-  @Named("welcomeMessage2")
-  public static QualifiedWelcomeMessage welcomeMessageWithQualifiers2() {
-    return new QualifiedWelcomeMessage("Hello from CDI-Lite qualified bean 2!");
-  }
 }
