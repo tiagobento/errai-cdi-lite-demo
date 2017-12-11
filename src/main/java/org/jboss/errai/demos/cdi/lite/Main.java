@@ -19,11 +19,7 @@ package org.jboss.errai.demos.cdi.lite;
 import org.jboss.errai.common.configuration.ErraiApp;
 import org.jboss.errai.common.configuration.ErraiModule;
 import org.jboss.errai.demos.cdi.lite.beans.WelcomeService;
-import org.jboss.errai.ioc.client.Bootstrapper;
-import org.jboss.errai.ioc.client.Container;
-import org.jboss.errai.ioc.client.container.BeanManagerSetup;
-import org.jboss.errai.ioc.client.container.IOCEnvironment;
-import org.jboss.errai.ioc.client.container.SyncBeanManager;
+import org.jboss.errai.demos.cdi.lite.container.CdiLiteContainer;
 
 import static org.jboss.errai.common.configuration.Target.JAVA;
 
@@ -35,33 +31,15 @@ import static org.jboss.errai.common.configuration.Target.JAVA;
 @ErraiModule
 public class Main {
 
-  public static void main(final String[] args) throws Exception {
-    //Creates the BeanManager from the generated IOCEnvironmentImpl
-    final SyncBeanManager beanManager = getNewBeanManager();
+  public static void main(final String[] args) {
 
-    //Bootstraps the Container using the generated BootstrapperImpl
-    bootstrapContainer(beanManager);
+    final CdiLiteContainer container = new CdiLiteContainer();
 
-    //Asks the Container for an instance of WelcomeService
-    final WelcomeService welcomeService = beanManager.lookupBean(WelcomeService.class).getInstance();
+    final WelcomeService welcomeService = container.getBeanManager()
+                                                   .lookupBean(WelcomeService.class)
+                                                   .getInstance();
 
-    //Prints the publicMessage injected in the WelcomeService
     welcomeService.printWelcomeMessages();
   }
 
-  private static void bootstrapContainer(final SyncBeanManager beanManager) throws Exception {
-    new Container().bootstrapContainer((BeanManagerSetup) beanManager, newBootstrapper());
-  }
-
-  private static SyncBeanManager getNewBeanManager() throws Exception {
-    return (SyncBeanManager) newIocEnvironment().getNewBeanManager();
-  }
-
-  private static IOCEnvironment newIocEnvironment() throws Exception {
-    return (IOCEnvironment) Class.forName("org.jboss.errai.ioc.client.container.IOCEnvironmentImpl").newInstance();
-  }
-
-  private static Bootstrapper newBootstrapper() throws Exception {
-    return (Bootstrapper) Class.forName("org.jboss.errai.ioc.client.BootstrapperImpl").newInstance();
-  }
 }
