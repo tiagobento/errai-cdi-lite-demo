@@ -40,8 +40,12 @@ public class WelcomeService {
   @Inject
   public RegularWelcomeMessage publicMessage;
 
+  private final WelcomeMessage privateMessage;
+
   @Inject
-  private RegularWelcomeMessage privateMessage;
+  public WelcomeService(final RegularWelcomeMessage privateMessage) {
+    this.privateMessage = privateMessage;
+  }
 
   public void printWelcomeMessages() {
     System.out.println("Hello from CDI-Lite managed bean!");
