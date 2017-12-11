@@ -45,7 +45,7 @@ public class Main {
     //Asks the Container for an instance of WelcomeService
     final WelcomeService welcomeService = beanManager.lookupBean(WelcomeService.class).getInstance();
 
-    //Prints the message injected in the WelcomeService
+    //Prints the publicMessage injected in the WelcomeService
     welcomeService.printWelcomeMessages();
   }
 

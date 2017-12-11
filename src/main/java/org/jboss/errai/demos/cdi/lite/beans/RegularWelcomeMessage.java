@@ -22,7 +22,7 @@ import javax.enterprise.context.Dependent;
  * @author Tiago Bento <tfernand@redhat.com>
  */
 @Dependent
-public class NormalWelcomeMessage implements WelcomeMessage {
+public class RegularWelcomeMessage implements WelcomeMessage {
 
   @Override
   public String text() {

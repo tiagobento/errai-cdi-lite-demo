@@ -16,22 +16,15 @@
 
 package org.jboss.errai.demos.cdi.lite.beans;
 
-import javax.enterprise.context.Dependent;
-
 /**
  * @author Tiago Bento <tfernand@redhat.com>
  */
 
-@Dependent
 public class QualifiedWelcomeMessage implements WelcomeMessage {
 
-  public final String text;
+  private final String text;
 
-  public QualifiedWelcomeMessage() {
-    this("");
-  }
-
-  public QualifiedWelcomeMessage(final String text) {
+  QualifiedWelcomeMessage(final String text) {
     this.text = text;
   }
 

@@ -21,6 +21,8 @@ import com.google.inject.Inject;
 import javax.enterprise.context.Dependent;
 import javax.inject.Named;
 
+import static java.beans.Introspector.decapitalize;
+
 /**
  * @author Tiago Bento <tfernand@redhat.com>
  */
@@ -36,13 +38,22 @@ public class WelcomeService {
   public WelcomeMessage messageWithQualifier2;
 
   @Inject
-  public NormalWelcomeMessage message;
+  public RegularWelcomeMessage publicMessage;
+
+  @Inject
+  private RegularWelcomeMessage privateMessage;
 
   public void printWelcomeMessages() {
     System.out.println("Hello from CDI-Lite managed bean!");
-    System.out.println(message.text());
+    System.out.println("");
+
+    System.out.println("Public " + decapitalize(publicMessage.text()));
+    System.out.println("Private " + decapitalize(privateMessage.text()));
+    System.out.println("");
+
     System.out.println(messageWithQualifier1.text());
     System.out.println(messageWithQualifier2.text());
+    System.out.println("");
   }
 
 }

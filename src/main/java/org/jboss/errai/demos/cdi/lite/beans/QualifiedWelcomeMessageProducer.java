@@ -29,14 +29,12 @@ public class QualifiedWelcomeMessageProducer {
 
   @IOCProducer
   @Named("welcomeMessage1")
-  @ApplicationScoped
   public static QualifiedWelcomeMessage welcomeMessageWithQualifiers1() {
     return new QualifiedWelcomeMessage("Hello from CDI-Lite qualified bean 1!");
   }
 
   @IOCProducer
   @Named("welcomeMessage2")
-  @ApplicationScoped
   public static QualifiedWelcomeMessage welcomeMessageWithQualifiers2() {
     return new QualifiedWelcomeMessage("Hello from CDI-Lite qualified bean 2!");
   }
