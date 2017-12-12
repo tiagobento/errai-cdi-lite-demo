@@ -19,6 +19,7 @@ package org.jboss.errai.demos.cdi.lite.container;
 import org.jboss.errai.ioc.client.Bootstrapper;
 import org.jboss.errai.ioc.client.ErraiContainer;
 import org.jboss.errai.ioc.client.QualifierEqualityFactory;
+import org.jboss.errai.ioc.client.container.IOC;
 import org.jboss.errai.ioc.client.container.SyncBeanManager;
 import org.jboss.errai.ioc.client.container.SyncBeanManagerImpl;
 
@@ -38,7 +39,7 @@ public class CdiLiteContainer {
 
   public CdiLiteContainer() {
     try {
-      beanManager = new SyncBeanManagerImpl();
+      beanManager = (SyncBeanManagerImpl) IOC.getBeanManager();
       new ErraiContainer(beanManager, newBootstrapper(), newQualifierEqualityFactory()).bootstrap();
     } catch (final Exception e) {
       throw new RuntimeException("Failed to bootstrap CDI-Lite container", e);

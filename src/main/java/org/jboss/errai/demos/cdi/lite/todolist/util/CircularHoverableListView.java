@@ -123,7 +123,7 @@ public abstract class CircularHoverableListView<T extends ListItem<?>> implement
 
   protected void add(final T item) {
     items.add(item);
-    i = lastIndex();
+    i = items.indexOf(item);
   }
 
   protected T getHoveredItem() {
@@ -132,6 +132,18 @@ public abstract class CircularHoverableListView<T extends ListItem<?>> implement
 
   protected boolean isEmpty() {
     return items.isEmpty();
+  }
+
+  protected T getLastItem() {
+    return items.get(lastIndex());
+  }
+
+  protected void hover(final T item) {
+    i = items.indexOf(item);
+  }
+
+  protected void remove(final T item) {
+    items.remove(item);
   }
 
 }
