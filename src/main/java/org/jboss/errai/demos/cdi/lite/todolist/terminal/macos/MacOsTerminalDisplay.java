@@ -39,7 +39,7 @@ public class MacOsTerminalDisplay extends Display {
     System.out.flush();
 
     if (userCanGoBack()) {
-      System.out.println("Press [b] to go back\n");
+      System.out.println("Press [b] to go back.\n");
     }
 
     System.out.println(getCurrentView().render());

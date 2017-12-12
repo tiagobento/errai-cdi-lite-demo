@@ -35,7 +35,7 @@ public class ByeByeView implements View {
 
   @Override
   public String render() {
-    return "Thanks for using Errai CDI-Lite to-do list app!\n\nPress [q] to exit";
+    return "Thanks for using Errai CDI-Lite to-do list app!\n\n" + "Press [q] to exit.";
   }
 
   @Override

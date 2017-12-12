@@ -88,7 +88,7 @@ public class MacOsTerminalKeyListener extends KeyListener {
       while (true) {
         final char c = (char) input.read();
         for (int i = 0; i < getSubscribers().size(); i++) {
-          getSubscribers().get(i).onKeyPressed(Character.toLowerCase(c));
+          getSubscribers().get(i).onKeyPressed(c);
         }
       }
 

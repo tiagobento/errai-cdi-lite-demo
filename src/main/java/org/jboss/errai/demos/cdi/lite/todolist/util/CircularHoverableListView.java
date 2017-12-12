@@ -54,6 +54,10 @@ public abstract class CircularHoverableListView<T extends ListItem<?>> implement
     }
   }
 
+  protected String menu() {
+    return "Use the [s] and [w] keys to navigate.\n";
+  }
+
   private boolean isHovered(final T item) {
     return items.indexOf(item) == i;
   }
@@ -125,4 +129,9 @@ public abstract class CircularHoverableListView<T extends ListItem<?>> implement
   protected T getHoveredItem() {
     return items.get(i);
   }
+
+  protected boolean isEmpty() {
+    return items.isEmpty();
+  }
+
 }

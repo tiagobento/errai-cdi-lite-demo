@@ -14,21 +14,10 @@
  * limitations under the License.
  */
 
-package org.jboss.errai.demos.cdi.lite.todolist.home;
-
-import org.jboss.errai.demos.cdi.lite.todolist.model.View;
+package org.jboss.errai.demos.cdi.lite.todolist.todolist;
 
 /**
  * @author Tiago Bento <tfernand@redhat.com>
  */
-public class IntroductionView implements View {
-
-  @Override
-  public String render() {
-    return "-----------------------------------------------------\n"
-            + "Hello! This is a sample to-do list app using\n"
-            + "Errai CDI-Lite as its dependency injection framework.\n"
-            + "-----------------------------------------------------"
-            + "\n";
-  }
+public class TodoListViewController {
 }

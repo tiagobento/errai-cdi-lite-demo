@@ -17,7 +17,7 @@
 package org.jboss.errai.demos.cdi.lite.todolist.menu;
 
 import org.jboss.errai.common.client.api.annotations.IOCProducer;
-import org.jboss.errai.demos.cdi.lite.todolist.TodoListView;
+import org.jboss.errai.demos.cdi.lite.todolist.todolist.TodoListView;
 import org.jboss.errai.demos.cdi.lite.todolist.exit.ByeByeView;
 import org.jboss.errai.demos.cdi.lite.todolist.util.ListItems;
 
