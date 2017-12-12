@@ -14,10 +14,12 @@
  * limitations under the License.
  */
 
-package org.jboss.errai.demos.cdi.lite.todolist;
+package org.jboss.errai.demos.cdi.lite.todolist.menu;
 
-import org.jboss.errai.demos.cdi.lite.todolist.textual.KeyListener;
-import org.jboss.errai.demos.cdi.lite.todolist.textual.KeyPressSensitive;
+import org.jboss.errai.demos.cdi.lite.todolist.model.Display;
+import org.jboss.errai.demos.cdi.lite.todolist.util.ListItem;
+import org.jboss.errai.demos.cdi.lite.todolist.util.ListItems;
+import org.jboss.errai.demos.cdi.lite.todolist.model.View;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -27,15 +29,14 @@ import static java.util.stream.Collectors.joining;
 /**
  * @author Tiago Bento <tfernand@redhat.com>
  */
-public class MenuView implements View, KeyPressSensitive {
+public class MainMenuView implements View {
 
-  private final List<MenuItem> items;
+  private final List<ListItem> items;
   private final Display display;
   private int hoveredIndex;
 
   @Inject
-  public MenuView(final Display display, final MenuItems items, final KeyListener keyListener) {
-    this.subscribeTo(keyListener);
+  public MainMenuView(final Display display, final @MainMenu ListItems items) {
     this.display = display;
     this.items = items.getItems();
     this.hoveredIndex = 0;
@@ -46,12 +47,12 @@ public class MenuView implements View, KeyPressSensitive {
     return items.stream().map(this::render).collect(joining("\n"));
   }
 
-  private String render(final MenuItem item) {
+  private String render(final ListItem item) {
     return item.getLabel() + (items.indexOf(item) == hoveredIndex ? " <-" : "");
   }
 
   @Override
-  public void onKeyPressed(char key) {
+  public void onKeyPressed(final char key) {
     if (key == 'w') {
       hoveredIndex = hoveredIndex <= 0 ? items.size() - 1 : hoveredIndex - 1;
     } else if (key == 's') {

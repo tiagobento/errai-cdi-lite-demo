@@ -14,33 +14,20 @@
  * limitations under the License.
  */
 
-package org.jboss.errai.demos.cdi.lite.todolist;
+package org.jboss.errai.demos.cdi.lite.todolist.home;
 
-import javax.enterprise.context.Dependent;
-import javax.inject.Inject;
-import java.util.Arrays;
-import java.util.List;
+import org.jboss.errai.demos.cdi.lite.todolist.model.View;
 
 /**
  * @author Tiago Bento <tfernand@redhat.com>
  */
-@Dependent
-public class MenuItems {
+public class IntroductionView implements View {
 
-  private final List<MenuItem> items;
-
-  @Inject
-  public MenuItems(final TodoListView todoListView) {
-    this.items = Arrays.asList(
-
-            new MenuItem("Menu item 1", todoListView),
-
-            new MenuItem("Menu item 2", todoListView),
-
-            new MenuItem("Exit", todoListView));
-  }
-
-  public List<MenuItem> getItems() {
-    return items;
+  @Override
+  public String render() {
+    return "Hello. This is a sample to-do list app using\n"
+            + "Errai CDI-Lite as its dependency injection framework\n"
+            + "\n"
+            + "Use the s and w keys to navigate";
   }
 }
