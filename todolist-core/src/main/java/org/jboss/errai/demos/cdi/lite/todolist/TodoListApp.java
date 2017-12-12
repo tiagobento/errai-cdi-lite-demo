@@ -16,6 +16,7 @@
 
 package org.jboss.errai.demos.cdi.lite.todolist;
 
+import org.jboss.errai.common.configuration.ErraiModule;
 import org.jboss.errai.demos.cdi.lite.todolist.home.HomeView;
 import org.jboss.errai.demos.cdi.lite.todolist.model.Display;
 import org.jboss.errai.demos.cdi.lite.todolist.model.KeyListener;
@@ -28,6 +29,7 @@ import javax.inject.Inject;
  * @author Tiago Bento <tfernand@redhat.com>
  */
 @Dependent
+@ErraiModule
 public class TodoListApp {
 
   private final Display display;
