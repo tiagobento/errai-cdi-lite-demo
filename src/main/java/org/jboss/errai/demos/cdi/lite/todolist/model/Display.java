@@ -19,36 +19,41 @@ package org.jboss.errai.demos.cdi.lite.todolist.model;
 import org.jboss.errai.demos.cdi.lite.todolist.textual.KeyListener;
 import org.jboss.errai.demos.cdi.lite.todolist.textual.KeyPressSensitive;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+import javax.annotation.PostConstruct;
 import java.util.Stack;
 
 /**
  * @author Tiago Bento <tfernand@redhat.com>
  */
-@ApplicationScoped
-public class Display implements KeyPressSensitive {
+public abstract class Display implements KeyPressSensitive {
 
   private final Stack<View> viewStack;
+  private final KeyListener keyListener;
 
-  protected Display() {
-    viewStack = null;
-  }
-
-  @Inject
   public Display(final KeyListener keyListener) {
     this.viewStack = new Stack<>();
+    this.keyListener = keyListener;
+  }
+
+  @PostConstruct
+  public void init() {
     this.subscribeTo(keyListener);
   }
+
+  protected abstract void refresh();
 
   public void setActiveView(final View activeView) {
     viewStack.push(activeView);
   }
 
+  protected boolean userCanGoBack() {
+    return viewStack.size() > 1;
+  }
+
   @Override
   public void onKeyPressed(final char key) {
 
-    if (key == 'b' && viewStack.size() > 1) {
+    if (key == 'b' && userCanGoBack()) {
       viewStack.pop().onKeyPressed(key);
     }
 
@@ -56,9 +61,7 @@ public class Display implements KeyPressSensitive {
     refresh();
   }
 
-  public void refresh() {
-    System.out.print("\033[H\033[2J");
-    System.out.flush();
-    System.out.println(viewStack.peek().render());
+  protected View getCurrentView() {
+    return viewStack.peek();
   }
 }

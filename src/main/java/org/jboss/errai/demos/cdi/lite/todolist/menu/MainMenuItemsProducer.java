@@ -19,11 +19,9 @@ package org.jboss.errai.demos.cdi.lite.todolist.menu;
 import org.jboss.errai.common.client.api.annotations.IOCProducer;
 import org.jboss.errai.demos.cdi.lite.todolist.TodoListView;
 import org.jboss.errai.demos.cdi.lite.todolist.exit.ExitView;
-import org.jboss.errai.demos.cdi.lite.todolist.util.ListItem;
 import org.jboss.errai.demos.cdi.lite.todolist.util.ListItems;
 
 import javax.enterprise.inject.Produces;
-import java.util.Arrays;
 
 /**
  * @author Tiago Bento <tfernand@redhat.com>
@@ -33,13 +31,16 @@ public class MainMenuItemsProducer {
   @Produces
   @IOCProducer
   @MainMenu
-  public static ListItems mainMenuItems(final TodoListView todoListView, final ExitView exitView) {
-    return new ListItems(Arrays.asList(
+  public static ListItems mainMenuItems(final TodoListView todoListView1,
+          final TodoListView todoListView2,
+          final ExitView exitView) {
 
-            new ListItem("Menu item 1", todoListView),
+    return new ListItems<>(
 
-            new ListItem("Menu item 2", todoListView),
+            new MenuItem("To-do list 1", todoListView1),
 
-            new ListItem("Exit", exitView)));
+            new MenuItem("To-do list 2", todoListView2),
+
+            new MenuItem("Exit", exitView));
   }
 }

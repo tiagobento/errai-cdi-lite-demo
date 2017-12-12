@@ -14,25 +14,36 @@
  * limitations under the License.
  */
 
-package org.jboss.errai.demos.cdi.lite.todolist.util;
+package org.jboss.errai.demos.cdi.lite.todolist;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import org.jboss.errai.demos.cdi.lite.todolist.model.View;
+import org.jboss.errai.demos.cdi.lite.todolist.util.ListItem;
 
 /**
  * @author Tiago Bento <tfernand@redhat.com>
  */
-public class ListItems<T extends ListItem<?>> {
+public class TodoListItem extends ListItem<TodoListItem.Status> {
 
-  private final List<T> items;
-
-  @SafeVarargs
-  public ListItems(final T... items) {
-    this.items = new ArrayList<>(Arrays.asList(items));
+  TodoListItem(final String s, final Status o) {
+    super(s, o);
   }
 
-  public List<T> getItems() {
-    return items;
+  @Override
+  public String render() {
+    return getLabel() + " " + getObject().render();
+  }
+
+  public enum Status implements View {
+    TODO(""), COMPLETED("✓");
+
+    private String c;
+
+    Status(final String c) {
+      this.c = c;
+    }
+
+    public String render() {
+      return c;
+    }
   }
 }

@@ -17,9 +17,9 @@
 package org.jboss.errai.demos.cdi.lite.todolist.menu;
 
 import org.jboss.errai.demos.cdi.lite.todolist.model.Display;
-import org.jboss.errai.demos.cdi.lite.todolist.util.ListItem;
+import org.jboss.errai.demos.cdi.lite.todolist.textual.TextualDisplay;
+import org.jboss.errai.demos.cdi.lite.todolist.util.CircularHoverableListView;
 import org.jboss.errai.demos.cdi.lite.todolist.util.ListItems;
-import org.jboss.errai.demos.cdi.lite.todolist.model.View;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -29,36 +29,28 @@ import static java.util.stream.Collectors.joining;
 /**
  * @author Tiago Bento <tfernand@redhat.com>
  */
-public class MainMenuView implements View {
+public class MainMenuView extends CircularHoverableListView<MenuItem> {
 
-  private final List<ListItem> items;
+  private final List<MenuItem> items;
   private final Display display;
-  private int hoveredIndex;
 
   @Inject
-  public MainMenuView(final Display display, final @MainMenu ListItems items) {
+  public MainMenuView(final Display display, final @MainMenu ListItems<MenuItem> items) {
+    super(items);
     this.display = display;
     this.items = items.getItems();
-    this.hoveredIndex = 0;
-  }
-
-  @Override
-  public String render() {
-    return items.stream().map(this::render).collect(joining("\n"));
-  }
-
-  private String render(final ListItem item) {
-    return item.getLabel() + (items.indexOf(item) == hoveredIndex ? " <-" : "");
   }
 
   @Override
   public void onKeyPressed(final char key) {
-    if (key == 'w') {
-      hoveredIndex = hoveredIndex <= 0 ? items.size() - 1 : hoveredIndex - 1;
-    } else if (key == 's') {
-      hoveredIndex = hoveredIndex >= items.size() - 1 ? 0 : hoveredIndex + 1;
-    } else if (key == '\n') {
-      display.setActiveView(items.get(hoveredIndex).getView());
+    super.onKeyPressed(key);
+
+    switch (key) {
+    case '\n': onEnterPressed(); break;
     }
+  }
+
+  private void onEnterPressed() {
+    display.setActiveView(items.get(getHoveredItemIndex()).getObject());
   }
 }
