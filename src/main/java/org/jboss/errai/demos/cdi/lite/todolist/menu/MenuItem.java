@@ -16,7 +16,6 @@
 
 package org.jboss.errai.demos.cdi.lite.todolist.menu;
 
-import org.jboss.errai.demos.cdi.lite.todolist.TodoListView;
 import org.jboss.errai.demos.cdi.lite.todolist.model.View;
 import org.jboss.errai.demos.cdi.lite.todolist.util.ListItem;
 
@@ -25,12 +24,16 @@ import org.jboss.errai.demos.cdi.lite.todolist.util.ListItem;
  */
 public class MenuItem extends ListItem<View> {
 
-  public MenuItem(final String label, final View view) {
+  MenuItem(final String label, final View view) {
     super(label, view);
   }
 
   @Override
   public String render() {
     return getLabel();
+  }
+
+  public View getView() {
+    return getObject();
   }
 }

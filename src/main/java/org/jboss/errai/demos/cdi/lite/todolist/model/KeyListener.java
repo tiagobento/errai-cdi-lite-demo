@@ -14,20 +14,31 @@
  * limitations under the License.
  */
 
-package org.jboss.errai.demos.cdi.lite.todolist.textual;
+package org.jboss.errai.demos.cdi.lite.todolist.model;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Tiago Bento <tfernand@redhat.com>
  */
-public interface KeyPressSensitive {
+public abstract class KeyListener {
 
-  void onKeyPressed(final char key);
+  private final List<KeyPressSensitive> subscribers = new ArrayList<>();
 
-  default void subscribeTo(final KeyListener keyListener) {
-    keyListener.registerSubscriber(this);
+  public abstract void start();
+
+  public abstract void stop();
+
+  void registerSubscriber(final KeyPressSensitive k) {
+    subscribers.add(k);
   }
 
-  default void unsubscribeFrom(final KeyListener keyListener) {
-    keyListener.registerSubscriber(this);
+  void deregisterSubscriber(final KeyPressSensitive k) {
+    subscribers.remove(k);
+  }
+
+  protected List<KeyPressSensitive> getSubscribers() {
+    return subscribers;
   }
 }

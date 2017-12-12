@@ -14,40 +14,20 @@
  * limitations under the License.
  */
 
-package org.jboss.errai.demos.cdi.lite.todolist;
-
-import org.jboss.errai.demos.cdi.lite.todolist.model.View;
-import org.jboss.errai.demos.cdi.lite.todolist.util.ListItem;
+package org.jboss.errai.demos.cdi.lite.todolist.model;
 
 /**
  * @author Tiago Bento <tfernand@redhat.com>
  */
-public class TodoListItem extends ListItem<TodoListItem.Status> {
+public interface KeyPressSensitive {
 
-  TodoListItem(final String label, final Status status) {
-    super(label, status);
+  void onKeyPressed(final char key);
+
+  default void subscribeTo(final KeyListener keyListener) {
+    keyListener.registerSubscriber(this);
   }
 
-  @Override
-  public String render() {
-    return getLabel() + " " + getState().render();
-  }
-
-  public Status getState() {
-    return getObject();
-  }
-
-  public enum Status implements View {
-    TODO(""), COMPLETED("✓");
-
-    private String c;
-
-    Status(final String c) {
-      this.c = c;
-    }
-
-    public String render() {
-      return c;
-    }
+  default void unsubscribeFrom(final KeyListener keyListener) {
+    keyListener.registerSubscriber(this);
   }
 }

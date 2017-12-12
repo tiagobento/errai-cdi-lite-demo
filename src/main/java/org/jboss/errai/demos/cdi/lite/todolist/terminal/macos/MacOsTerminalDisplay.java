@@ -14,40 +14,34 @@
  * limitations under the License.
  */
 
-package org.jboss.errai.demos.cdi.lite.todolist;
+package org.jboss.errai.demos.cdi.lite.todolist.terminal.macos;
 
-import org.jboss.errai.demos.cdi.lite.todolist.model.View;
-import org.jboss.errai.demos.cdi.lite.todolist.util.ListItem;
+import org.jboss.errai.demos.cdi.lite.todolist.model.Display;
+import org.jboss.errai.demos.cdi.lite.todolist.model.KeyListener;
+
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 
 /**
  * @author Tiago Bento <tfernand@redhat.com>
  */
-public class TodoListItem extends ListItem<TodoListItem.Status> {
+@ApplicationScoped
+public class MacOsTerminalDisplay extends Display {
 
-  TodoListItem(final String label, final Status status) {
-    super(label, status);
+  @Inject
+  public MacOsTerminalDisplay(final KeyListener keyListener) {
+    super(keyListener);
   }
 
   @Override
-  public String render() {
-    return getLabel() + " " + getState().render();
-  }
+  public void refresh() {
+    System.out.print("\033[H\033[2J");
+    System.out.flush();
 
-  public Status getState() {
-    return getObject();
-  }
-
-  public enum Status implements View {
-    TODO(""), COMPLETED("✓");
-
-    private String c;
-
-    Status(final String c) {
-      this.c = c;
+    if (userCanGoBack()) {
+      System.out.println("Press [b] to go back\n");
     }
 
-    public String render() {
-      return c;
-    }
+    System.out.println(getCurrentView().render());
   }
 }

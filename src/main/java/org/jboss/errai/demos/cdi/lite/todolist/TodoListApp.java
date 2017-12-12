@@ -17,8 +17,8 @@
 package org.jboss.errai.demos.cdi.lite.todolist;
 
 import org.jboss.errai.demos.cdi.lite.todolist.home.HomeView;
-import org.jboss.errai.demos.cdi.lite.todolist.textual.TextualDisplay;
-import org.jboss.errai.demos.cdi.lite.todolist.textual.KeyListener;
+import org.jboss.errai.demos.cdi.lite.todolist.model.Display;
+import org.jboss.errai.demos.cdi.lite.todolist.model.KeyListener;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.Dependent;
@@ -30,12 +30,12 @@ import javax.inject.Inject;
 @Dependent
 public class TodoListApp {
 
-  private final TextualDisplay display;
+  private final Display display;
   private final KeyListener keyListener;
   private final HomeView homeView;
 
   @Inject
-  public TodoListApp(final TextualDisplay display, final KeyListener keyListener, final HomeView homeView) {
+  public TodoListApp(final Display display, final KeyListener keyListener, final HomeView homeView) {
     this.display = display;
     this.keyListener = keyListener;
     this.homeView = homeView;

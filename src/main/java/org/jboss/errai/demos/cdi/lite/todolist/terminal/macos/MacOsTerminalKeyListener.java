@@ -14,46 +14,35 @@
  * limitations under the License.
  */
 
-package org.jboss.errai.demos.cdi.lite.todolist.textual;
+package org.jboss.errai.demos.cdi.lite.todolist.terminal.macos;
 
-import org.jboss.errai.common.client.api.annotations.IOCProducer;
+import org.jboss.errai.demos.cdi.lite.todolist.model.KeyListener;
 
+import javax.enterprise.context.ApplicationScoped;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author Tiago Bento <tfernand@redhat.com>
  */
-public class KeyListener {
-
-  private static final KeyListener k = new KeyListener();
-
-  @IOCProducer
-  public static KeyListener keyListener() {
-    return k;
-  }
+public class MacOsTerminalKeyListener extends KeyListener {
 
   private String ttyConfig;
-  private final List<KeyPressSensitive> subscribers = new ArrayList<>();
   private final Thread thread;
 
-  public KeyListener() {
+  MacOsTerminalKeyListener() {
     thread = new Thread(this::listenToKeys);
   }
 
-  void registerSubscriber(final KeyPressSensitive k) {
-    subscribers.add(k);
+  @Override
+  public void stop() {
+    thread.stop();
   }
 
-  void deregisterSubscriber(final KeyPressSensitive k) {
-    subscribers.remove(k);
-  }
-
+  @Override
   public void start() {
     thread.start();
   }
@@ -98,8 +87,8 @@ public class KeyListener {
 
       while (true) {
         final char c = (char) input.read();
-        for (int i = 0; i < subscribers.size(); i++) {
-          subscribers.get(i).onKeyPressed(Character.toLowerCase(c));
+        for (int i = 0; i < getSubscribers().size(); i++) {
+          getSubscribers().get(i).onKeyPressed(Character.toLowerCase(c));
         }
       }
 
@@ -113,9 +102,5 @@ public class KeyListener {
         System.err.println("Exception restoring tty config");
       }
     }
-  }
-
-  public void stop() {
-    thread.stop();
   }
 }

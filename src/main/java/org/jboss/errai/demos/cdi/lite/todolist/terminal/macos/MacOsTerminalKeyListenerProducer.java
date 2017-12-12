@@ -14,34 +14,20 @@
  * limitations under the License.
  */
 
-package org.jboss.errai.demos.cdi.lite.todolist.exit;
+package org.jboss.errai.demos.cdi.lite.todolist.terminal.macos;
 
-import org.jboss.errai.demos.cdi.lite.todolist.model.View;
-import org.jboss.errai.demos.cdi.lite.todolist.textual.KeyListener;
-
-import javax.inject.Inject;
+import org.jboss.errai.common.client.api.annotations.IOCProducer;
+import org.jboss.errai.demos.cdi.lite.todolist.model.KeyListener;
 
 /**
  * @author Tiago Bento <tfernand@redhat.com>
  */
-public class ExitView implements View {
+public class MacOsTerminalKeyListenerProducer {
 
-  private final KeyListener keyListener;
+  private static final KeyListener keyListener = new MacOsTerminalKeyListener();
 
-  @Inject
-  public ExitView(final KeyListener keyListener) {
-    this.keyListener = keyListener;
-  }
-
-  @Override
-  public String render() {
-    return "Thanks for using Errai CDI-Lite to-do list app!\n\nPress [q] to exit";
-  }
-
-  @Override
-  public void onKeyPressed(final char key) {
-    if (key == 'q') {
-      keyListener.stop();
-    }
+  @IOCProducer
+  public static KeyListener keyListener() {
+    return keyListener;
   }
 }

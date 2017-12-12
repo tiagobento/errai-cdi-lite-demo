@@ -95,14 +95,12 @@ public class TodoListView extends CircularHoverableListView<TodoListItem> {
   }
 
   private void onCheckPressed() {
-    final TodoListItem currentItem = items.get(getHoveredItemIndex());
-
-    switch (currentItem.getObject()) {
+    switch (getHoveredItem().getState()) {
     case TODO:
-      updateHovered(new TodoListItem(currentItem.getLabel(), COMPLETED));
+      updateHovered(new TodoListItem(getHoveredItem().getLabel(), COMPLETED));
       break;
     case COMPLETED:
-      updateHovered(new TodoListItem(currentItem.getLabel(), TODO));
+      updateHovered(new TodoListItem(getHoveredItem().getLabel(), TODO));
       break;
     }
   }
