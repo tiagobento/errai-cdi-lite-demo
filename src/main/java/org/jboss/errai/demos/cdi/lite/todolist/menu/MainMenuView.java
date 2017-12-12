@@ -48,4 +48,14 @@ public class MainMenuView extends CircularHoverableListView<MenuItem> {
   private void onEnterPressed() {
     display.setActiveView(getHoveredItem().getView());
   }
+
+  @Override
+  public String render() {
+    return super.render() + "\n\n" + menu();
+  }
+
+  @Override
+  protected String menu() {
+    return super.menu() + "Press [Enter] to select an option.";
+  }
 }

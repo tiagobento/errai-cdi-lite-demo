@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.jboss.errai.demos.cdi.lite.todolist;
+package org.jboss.errai.demos.cdi.lite.todolist.todolist;
 
 import org.jboss.errai.demos.cdi.lite.todolist.model.View;
 import org.jboss.errai.demos.cdi.lite.todolist.util.ListItem;

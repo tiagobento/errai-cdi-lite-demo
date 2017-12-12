@@ -28,23 +28,23 @@ import javax.inject.Inject;
 @Dependent
 public class HomeView implements View {
 
-  private final MainMenuView menuView;
   private final IntroductionView introductionView;
+  private final MainMenuView menuView;
 
   @Inject
-  public HomeView(final MainMenuView menuView, final IntroductionView introductionView) {
-    this.menuView = menuView;
+  public HomeView(final IntroductionView introductionView, final MainMenuView menuView) {
     this.introductionView = introductionView;
+    this.menuView = menuView;
   }
 
   @Override
   public String render() {
-    return introductionView.render() + "\n\n" + menuView.render();
+    return introductionView.render() + "\n" + menuView.render();
   }
 
   @Override
   public void onKeyPressed(final char key) {
-    menuView.onKeyPressed(key);
     introductionView.onKeyPressed(key);
+    menuView.onKeyPressed(key);
   }
 }
