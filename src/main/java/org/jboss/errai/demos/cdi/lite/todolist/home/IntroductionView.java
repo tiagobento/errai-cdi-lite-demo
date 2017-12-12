@@ -25,9 +25,10 @@ public class IntroductionView implements View {
 
   @Override
   public String render() {
-    return "Hello. This is a sample to-do list app using\n"
-            + "Errai CDI-Lite as its dependency injection framework\n"
+    return "Hello! This is a sample to-do list app using\n"
+            + "Errai CDI-Lite as its dependency injection framework.\n"
             + "\n"
-            + "Use the s and w keys to navigate";
+            + "Use the [s] and [w] keys to navigate.\n"
+            + "Press [Enter] to select an option.";
   }
 }

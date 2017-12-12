@@ -23,10 +23,11 @@ public interface KeyPressSensitive {
 
   void onKeyPressed(final char key);
 
-  default void subscribeTo(final KeyListener k) {
-    k.registerSubscriber(this);
+  default void subscribeTo(final KeyListener keyListener) {
+    keyListener.registerSubscriber(this);
   }
-  default void unsubscribeFrom(final KeyListener k) {
-    k.registerSubscriber(this);
+
+  default void unsubscribeFrom(final KeyListener keyListener) {
+    keyListener.registerSubscriber(this);
   }
 }

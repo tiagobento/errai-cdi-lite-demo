@@ -35,11 +35,11 @@ public class ExitView implements View {
 
   @Override
   public String render() {
-    return "Thanks for using Errai's CDI-Lite ToDo list demo app! Press q to exit";
+    return "Thanks for using Errai CDI-Lite to-do list app!\n\nPress [q] to exit";
   }
 
   @Override
-  public void onKeyPressed(char key) {
+  public void onKeyPressed(final char key) {
     if (key == 'q') {
       keyListener.stop();
     }
