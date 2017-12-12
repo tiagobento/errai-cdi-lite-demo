@@ -111,18 +111,22 @@ public class TodoListView extends CircularHoverableListView<TodoListItem> {
   private void navigatingModeOnKeyPressed(final char key) {
     super.onKeyPressed(key);
     switch (key) {
-    case 'd': onDeletePressed();
-      break;
     case 'a': onAddPressed();
       break;
-    case 'e': onEditPressed();
-      break;
-    case 'c': onCheckPressed();
-      break;
-    case '<': onMoveUpPressed();
-      break;
-    case '>': onMoveDownPressed();
-      break;
+    }
+    if (!isEmpty()) {
+      switch (key) {
+      case 'd': onDeletePressed();
+        break;
+      case 'e': onEditPressed();
+        break;
+      case 'c': onCheckPressed();
+        break;
+      case '<': onMoveUpPressed();
+        break;
+      case '>': onMoveDownPressed();
+        break;
+      }
     }
   }
 

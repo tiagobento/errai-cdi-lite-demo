@@ -17,8 +17,10 @@
 package org.jboss.errai.demos.cdi.lite.todolist.menu;
 
 import org.jboss.errai.demos.cdi.lite.todolist.model.Display;
+import org.jboss.errai.demos.cdi.lite.todolist.todolist.TodoListView;
 import org.jboss.errai.demos.cdi.lite.todolist.util.CircularHoverableListView;
 import org.jboss.errai.demos.cdi.lite.todolist.util.ListItems;
+import org.jboss.errai.ioc.client.api.ManagedInstance;
 
 import javax.inject.Inject;
 
@@ -28,6 +30,9 @@ import javax.inject.Inject;
 public class MainMenuView extends CircularHoverableListView<MenuItem> {
 
   private final Display display;
+
+  @Inject
+  public ManagedInstance<TodoListView> todoListViewManagedInstance;
 
   @Inject
   public MainMenuView(final Display display, final @MainMenu ListItems<MenuItem> items) {
@@ -42,7 +47,19 @@ public class MainMenuView extends CircularHoverableListView<MenuItem> {
     switch (key) {
     case '\n': onEnterPressed();
       break;
+    case 'a':
+      add(new MenuItem("New to-do list", todoListViewManagedInstance.get()));
+      break;
     }
+  }
+
+  @Override
+  protected void add(final MenuItem item) {
+    final MenuItem exitItem = getLastItem();
+    remove(exitItem);
+    super.add(item);
+    super.add(exitItem);
+    hover(item);
   }
 
   private void onEnterPressed() {
