@@ -14,19 +14,16 @@
  * limitations under the License.
  */
 
-package org.jboss.errai.demos.cdi.lite.todolist.textual;
+package org.jboss.errai.demos.cdi.lite.todolist.menu;
+
+import javax.inject.Qualifier;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 /**
  * @author Tiago Bento <tfernand@redhat.com>
  */
-public interface KeyPressSensitive {
-
-  void onKeyPressed(final char key);
-
-  default void subscribeTo(final KeyListener k) {
-    k.registerSubscriber(this);
-  }
-  default void unsubscribeFrom(final KeyListener k) {
-    k.registerSubscriber(this);
-  }
+@Qualifier
+@Retention(RetentionPolicy.RUNTIME)
+public @interface MainMenu {
 }

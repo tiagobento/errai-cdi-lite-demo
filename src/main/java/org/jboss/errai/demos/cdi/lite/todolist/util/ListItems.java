@@ -14,12 +14,22 @@
  * limitations under the License.
  */
 
-package org.jboss.errai.demos.cdi.lite.todolist;
+package org.jboss.errai.demos.cdi.lite.todolist.util;
+
+import java.util.List;
 
 /**
  * @author Tiago Bento <tfernand@redhat.com>
  */
-public interface View {
+public class ListItems {
 
-  String render();
+  private final List<ListItem> items;
+
+  public ListItems(final List<ListItem> items) {
+    this.items = items;
+  }
+
+  public List<ListItem> getItems() {
+    return items;
+  }
 }

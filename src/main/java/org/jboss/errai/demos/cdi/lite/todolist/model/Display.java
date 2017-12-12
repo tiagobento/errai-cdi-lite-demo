@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.jboss.errai.demos.cdi.lite.todolist;
+package org.jboss.errai.demos.cdi.lite.todolist.model;
 
 import org.jboss.errai.demos.cdi.lite.todolist.textual.KeyListener;
 import org.jboss.errai.demos.cdi.lite.todolist.textual.KeyPressSensitive;
@@ -29,35 +29,36 @@ import java.util.Stack;
 @ApplicationScoped
 public class Display implements KeyPressSensitive {
 
-  private Stack<View> view;
+  private final Stack<View> viewStack;
 
   protected Display() {
-    view = new Stack<>();
+    viewStack = null;
   }
 
   @Inject
   public Display(final KeyListener keyListener) {
-    this();
+    this.viewStack = new Stack<>();
     this.subscribeTo(keyListener);
   }
 
-  public void setActiveView(final View view) {
-    this.view.push(view);
+  public void setActiveView(final View activeView) {
+    viewStack.push(activeView);
   }
 
   @Override
-  public void onKeyPressed(char key) {
+  public void onKeyPressed(final char key) {
 
-    if (key == 'b' && view.size() > 1) {
-      view.pop();
+    if (key == 'b' && viewStack.size() > 1) {
+      viewStack.pop().onKeyPressed(key);
     }
 
+    viewStack.peek().onKeyPressed(key);
     refresh();
   }
 
   public void refresh() {
     System.out.print("\033[H\033[2J");
     System.out.flush();
-    System.out.println(view.peek().render());
+    System.out.println(viewStack.peek().render());
   }
 }

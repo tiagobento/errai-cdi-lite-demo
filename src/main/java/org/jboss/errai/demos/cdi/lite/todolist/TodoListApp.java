@@ -16,10 +16,10 @@
 
 package org.jboss.errai.demos.cdi.lite.todolist;
 
+import org.jboss.errai.demos.cdi.lite.todolist.home.HomeView;
+import org.jboss.errai.demos.cdi.lite.todolist.model.Display;
 import org.jboss.errai.demos.cdi.lite.todolist.textual.KeyListener;
-import org.jboss.errai.demos.cdi.lite.todolist.textual.KeyPressSensitive;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 
@@ -27,15 +27,12 @@ import javax.inject.Inject;
  * @author Tiago Bento <tfernand@redhat.com>
  */
 @Dependent
-public class TodoListApp implements KeyPressSensitive {
+public class TodoListApp {
 
   private final Display display;
-  private final KeyListener keyListener;
 
   @Inject
   public TodoListApp(final Display display, final KeyListener keyListener, final HomeView homeView) {
-    this.keyListener = keyListener;
-    subscribeTo(keyListener);
     keyListener.start();
 
     this.display = display;
@@ -44,12 +41,5 @@ public class TodoListApp implements KeyPressSensitive {
 
   public void start() {
     display.refresh();
-  }
-
-  @Override
-  public void onKeyPressed(char key) {
-    if (key == 'q') {
-      keyListener.stop();
-    }
   }
 }

@@ -14,26 +14,18 @@
  * limitations under the License.
  */
 
-package org.jboss.errai.demos.cdi.lite.todolist;
+package org.jboss.errai.demos.cdi.lite.todolist.model;
+
+import org.jboss.errai.demos.cdi.lite.todolist.textual.KeyPressSensitive;
 
 /**
  * @author Tiago Bento <tfernand@redhat.com>
  */
-public class MenuItem {
+public interface View extends KeyPressSensitive {
 
-  private final String label;
-  private final View view;
+  String render();
 
-  public MenuItem(final String label, final View view) {
-    this.label = label;
-    this.view = view;
-  }
-
-  public String getLabel() {
-    return label;
-  }
-
-  public View getView() {
-    return view;
+  @Override
+  default void onKeyPressed(final char key) {
   }
 }

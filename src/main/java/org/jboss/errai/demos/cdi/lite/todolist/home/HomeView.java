@@ -14,7 +14,10 @@
  * limitations under the License.
  */
 
-package org.jboss.errai.demos.cdi.lite.todolist;
+package org.jboss.errai.demos.cdi.lite.todolist.home;
+
+import org.jboss.errai.demos.cdi.lite.todolist.menu.MainMenuView;
+import org.jboss.errai.demos.cdi.lite.todolist.model.View;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
@@ -25,15 +28,23 @@ import javax.inject.Inject;
 @Dependent
 public class HomeView implements View {
 
-  private final MenuView menuView;
+  private final MainMenuView menuView;
+  private final IntroductionView introductionView;
 
   @Inject
-  public HomeView(final MenuView menuView) {
+  public HomeView(final MainMenuView menuView, final IntroductionView introductionView) {
     this.menuView = menuView;
+    this.introductionView = introductionView;
   }
 
   @Override
   public String render() {
-    return menuView.render();
+    return introductionView.render() + "\n\n" + menuView.render();
+  }
+
+  @Override
+  public void onKeyPressed(final char key) {
+    menuView.onKeyPressed(key);
+    introductionView.onKeyPressed(key);
   }
 }

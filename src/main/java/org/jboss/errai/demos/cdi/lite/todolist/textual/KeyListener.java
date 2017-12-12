@@ -16,7 +16,8 @@
 
 package org.jboss.errai.demos.cdi.lite.todolist.textual;
 
-import javax.enterprise.context.ApplicationScoped;
+import org.jboss.errai.common.client.api.annotations.IOCProducer;
+
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -28,8 +29,14 @@ import java.util.List;
 /**
  * @author Tiago Bento <tfernand@redhat.com>
  */
-@ApplicationScoped
 public class KeyListener {
+
+  private static final KeyListener k = new KeyListener();
+
+  @IOCProducer
+  public static KeyListener keyListener() {
+    return k;
+  }
 
   private static String ttyConfig;
   private final List<KeyPressSensitive> subscribers = new ArrayList<>();
@@ -39,8 +46,12 @@ public class KeyListener {
     thread = new Thread(this::listenToKeys);
   }
 
-  public void registerSubscriber(final KeyPressSensitive k) {
+  void registerSubscriber(final KeyPressSensitive k) {
     subscribers.add(k);
+  }
+
+  void deregisterSubscriber(final KeyPressSensitive k) {
+    subscribers.remove(k);
   }
 
   public void start() {
@@ -85,15 +96,14 @@ public class KeyListener {
     try (BufferedReader input = new BufferedReader(new InputStreamReader(System.in))) {
       setTerminalToCBreak();
 
-      char line = ' ';
-
-      while (line != 'q') {
+      while (true) {
         final char c = (char) input.read();
-        subscribers.forEach(s -> s.onKeyPressed(c));
-        line = c;
+        for (int i = 0; i < subscribers.size(); i++) {
+          subscribers.get(i).onKeyPressed(Character.toLowerCase(c));
+        }
       }
 
-    } catch (Exception e) {
+    } catch (final Exception e) {
       throw new RuntimeException("Error while listening to keys", e);
     } finally {
       try {

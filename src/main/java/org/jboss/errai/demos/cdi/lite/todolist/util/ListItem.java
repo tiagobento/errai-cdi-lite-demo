@@ -14,19 +14,28 @@
  * limitations under the License.
  */
 
-package org.jboss.errai.demos.cdi.lite.todolist.textual;
+package org.jboss.errai.demos.cdi.lite.todolist.util;
+
+import org.jboss.errai.demos.cdi.lite.todolist.model.View;
 
 /**
  * @author Tiago Bento <tfernand@redhat.com>
  */
-public interface KeyPressSensitive {
+public class ListItem {
 
-  void onKeyPressed(final char key);
+  private final String label;
+  private final View view;
 
-  default void subscribeTo(final KeyListener k) {
-    k.registerSubscriber(this);
+  public ListItem(final String label, final View view) {
+    this.label = label;
+    this.view = view;
   }
-  default void unsubscribeFrom(final KeyListener k) {
-    k.registerSubscriber(this);
+
+  public String getLabel() {
+    return label;
+  }
+
+  public View getView() {
+    return view;
   }
 }

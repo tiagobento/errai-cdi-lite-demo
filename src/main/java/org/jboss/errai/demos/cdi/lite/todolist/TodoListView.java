@@ -16,6 +16,8 @@
 
 package org.jboss.errai.demos.cdi.lite.todolist;
 
+import org.jboss.errai.demos.cdi.lite.todolist.model.View;
+
 import javax.enterprise.context.Dependent;
 
 /**
@@ -23,6 +25,7 @@ import javax.enterprise.context.Dependent;
  */
 @Dependent
 public class TodoListView implements View {
+
   @Override
   public String render() {
     return "This is a to do list.";

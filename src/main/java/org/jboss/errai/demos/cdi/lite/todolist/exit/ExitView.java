@@ -14,19 +14,34 @@
  * limitations under the License.
  */
 
-package org.jboss.errai.demos.cdi.lite.todolist.textual;
+package org.jboss.errai.demos.cdi.lite.todolist.exit;
+
+import org.jboss.errai.demos.cdi.lite.todolist.model.View;
+import org.jboss.errai.demos.cdi.lite.todolist.textual.KeyListener;
+
+import javax.inject.Inject;
 
 /**
  * @author Tiago Bento <tfernand@redhat.com>
  */
-public interface KeyPressSensitive {
+public class ExitView implements View {
 
-  void onKeyPressed(final char key);
+  private final KeyListener keyListener;
 
-  default void subscribeTo(final KeyListener k) {
-    k.registerSubscriber(this);
+  @Inject
+  public ExitView(final KeyListener keyListener) {
+    this.keyListener = keyListener;
   }
-  default void unsubscribeFrom(final KeyListener k) {
-    k.registerSubscriber(this);
+
+  @Override
+  public String render() {
+    return "Thanks for using Errai's CDI-Lite ToDo list demo app! Press q to exit";
+  }
+
+  @Override
+  public void onKeyPressed(char key) {
+    if (key == 'q') {
+      keyListener.stop();
+    }
   }
 }
