@@ -14,25 +14,23 @@
  * limitations under the License.
  */
 
-package org.jboss.errai.demos.cdi.lite.todolist.util;
+package org.jboss.errai.demos.cdi.lite.todolist.menu;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import org.jboss.errai.demos.cdi.lite.todolist.TodoListView;
+import org.jboss.errai.demos.cdi.lite.todolist.model.View;
+import org.jboss.errai.demos.cdi.lite.todolist.util.ListItem;
 
 /**
  * @author Tiago Bento <tfernand@redhat.com>
  */
-public class ListItems<T extends ListItem<?>> {
+public class MenuItem extends ListItem<View> {
 
-  private final List<T> items;
-
-  @SafeVarargs
-  public ListItems(final T... items) {
-    this.items = new ArrayList<>(Arrays.asList(items));
+  public MenuItem(final String label, final View view) {
+    super(label, view);
   }
 
-  public List<T> getItems() {
-    return items;
+  @Override
+  public String render() {
+    return getLabel();
   }
 }

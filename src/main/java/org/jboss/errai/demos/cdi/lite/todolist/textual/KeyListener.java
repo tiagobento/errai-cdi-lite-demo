@@ -38,7 +38,7 @@ public class KeyListener {
     return k;
   }
 
-  private static String ttyConfig;
+  private String ttyConfig;
   private final List<KeyPressSensitive> subscribers = new ArrayList<>();
   private final Thread thread;
 
@@ -58,7 +58,7 @@ public class KeyListener {
     thread.start();
   }
 
-  private static void setTerminalToCBreak() throws IOException, InterruptedException {
+  private void setTerminalToCBreak() throws IOException, InterruptedException {
     ttyConfig = stty("-g");
     stty("-icanon min 1"); // set the console to be character-buffered instead of line-buffered
     stty("-echo"); // disable character echoing
@@ -107,7 +107,7 @@ public class KeyListener {
       throw new RuntimeException("Error while listening to keys", e);
     } finally {
       try {
-        System.out.println("Bye..");
+        System.out.println("\nBye..");
         stty(ttyConfig.trim());
       } catch (final Exception e) {
         System.err.println("Exception restoring tty config");

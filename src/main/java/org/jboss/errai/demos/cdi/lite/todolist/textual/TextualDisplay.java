@@ -14,40 +14,37 @@
  * limitations under the License.
  */
 
-package org.jboss.errai.demos.cdi.lite.todolist;
+package org.jboss.errai.demos.cdi.lite.todolist.textual;
 
-import org.jboss.errai.demos.cdi.lite.todolist.home.HomeView;
-import org.jboss.errai.demos.cdi.lite.todolist.textual.TextualDisplay;
+import org.jboss.errai.demos.cdi.lite.todolist.model.Display;
+import org.jboss.errai.demos.cdi.lite.todolist.model.View;
 import org.jboss.errai.demos.cdi.lite.todolist.textual.KeyListener;
+import org.jboss.errai.demos.cdi.lite.todolist.textual.KeyPressSensitive;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.Dependent;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import java.util.Stack;
 
 /**
  * @author Tiago Bento <tfernand@redhat.com>
  */
-@Dependent
-public class TodoListApp {
-
-  private final TextualDisplay display;
-  private final KeyListener keyListener;
-  private final HomeView homeView;
+@ApplicationScoped
+public class TextualDisplay extends Display {
 
   @Inject
-  public TodoListApp(final TextualDisplay display, final KeyListener keyListener, final HomeView homeView) {
-    this.display = display;
-    this.keyListener = keyListener;
-    this.homeView = homeView;
+  public TextualDisplay(final KeyListener keyListener) {
+    super(keyListener);
   }
 
-  @PostConstruct
-  public void init() {
-    keyListener.start();
-    display.setActiveView(homeView);
-  }
+  @Override
+  public void refresh() {
+    System.out.print("\033[H\033[2J");
+    System.out.flush();
 
-  public void start() {
-    display.refresh();
+    if (userCanGoBack()) {
+      System.out.println("Press [b] to go back\n");
+    }
+
+    System.out.println(getCurrentView().render());
   }
 }

@@ -16,18 +16,109 @@
 
 package org.jboss.errai.demos.cdi.lite.todolist;
 
-import org.jboss.errai.demos.cdi.lite.todolist.model.View;
+import org.jboss.errai.demos.cdi.lite.todolist.util.CircularHoverableListView;
+import org.jboss.errai.demos.cdi.lite.todolist.util.ListItems;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.Dependent;
+import java.util.List;
+
+import static org.jboss.errai.demos.cdi.lite.todolist.TodoListItem.Status.COMPLETED;
+import static org.jboss.errai.demos.cdi.lite.todolist.TodoListItem.Status.TODO;
 
 /**
  * @author Tiago Bento <tfernand@redhat.com>
  */
 @Dependent
-public class TodoListView implements View {
+public class TodoListView extends CircularHoverableListView<TodoListItem> {
+
+  private final List<TodoListItem> items;
+
+  private State state;
+
+  public TodoListView() {
+    this(new ListItems<>());
+  }
+
+  private TodoListView(final ListItems<TodoListItem> items) {
+    super(items);
+    this.items = items.getItems();
+  }
+
+  @PostConstruct
+  public void init() {
+
+    items.add(new TodoListItem("Go shopping 1", TODO));
+    items.add(new TodoListItem("Go shopping 2", TODO));
+    items.add(new TodoListItem("Go shopping 3", TODO));
+
+    state = State.NAVIGATING;
+  }
 
   @Override
   public String render() {
-    return "This is a to do list.";
+    return "Press [a] to add.\n"
+            + "Press [e] to edit.\n"
+            + "Press [d] to delete.\n"
+            + "Press [<] to move item up.\n"
+            + "Press [>] to move item down.\n"
+            + "\n"
+            + super.render();
+  }
+
+  @Override
+  public void onKeyPressed(final char key) {
+    super.onKeyPressed(key);
+
+    switch (key) {
+    case 'd': onDeletePressed();
+      break;
+    case 'a': onAddPressed();
+      break;
+    case 'e': onEditPressed();
+      break;
+    case 'c': onCheckPressed();
+      break;
+    case '<': onMoveUpPressed();
+      break;
+    case '>': onMoveDownPressed();
+      break;
+    }
+  }
+
+  private void onMoveUpPressed() {
+    moveHoveredItemUp();
+  }
+
+  private void onMoveDownPressed() {
+    moveHoveredItemDown();
+  }
+
+  private void onCheckPressed() {
+    final TodoListItem currentItem = items.get(getHoveredItemIndex());
+
+    switch (currentItem.getObject()) {
+    case TODO:
+      updateHovered(new TodoListItem(currentItem.getLabel(), COMPLETED));
+      break;
+    case COMPLETED:
+      updateHovered(new TodoListItem(currentItem.getLabel(), TODO));
+      break;
+    }
+  }
+
+  private void onEditPressed() {
+  }
+
+  private void onAddPressed() {
+    add(new TodoListItem("Testing addition " + System.currentTimeMillis(), TODO));
+  }
+
+  private void onDeletePressed() {
+    removeHovered();
+  }
+
+  public enum State {
+    NAVIGATING, ADDING;
   }
 }

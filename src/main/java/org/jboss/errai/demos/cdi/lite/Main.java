@@ -28,8 +28,8 @@ import static org.jboss.errai.common.configuration.Target.JAVA;
  * @author Tiago Bento <tfernand@redhat.com>
  */
 
-@ErraiApp(gwtModuleName = "", target = JAVA)
 @ErraiModule
+@ErraiApp(gwtModuleName = "", target = JAVA)
 public class Main {
 
   public static void main(final String[] args) {

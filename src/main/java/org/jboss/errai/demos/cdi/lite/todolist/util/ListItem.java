@@ -21,21 +21,21 @@ import org.jboss.errai.demos.cdi.lite.todolist.model.View;
 /**
  * @author Tiago Bento <tfernand@redhat.com>
  */
-public class ListItem {
+public abstract class ListItem<T> implements View {
 
   private final String label;
-  private final View view;
+  private final T object;
 
-  public ListItem(final String label, final View view) {
+  public ListItem(final String label, final T object) {
     this.label = label;
-    this.view = view;
+    this.object = object;
   }
 
   public String getLabel() {
     return label;
   }
 
-  public View getView() {
-    return view;
+  public T getObject() {
+    return object;
   }
 }
