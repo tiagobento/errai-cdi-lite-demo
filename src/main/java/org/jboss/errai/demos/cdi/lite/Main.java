@@ -20,6 +20,7 @@ import org.jboss.errai.common.configuration.ErraiApp;
 import org.jboss.errai.common.configuration.ErraiModule;
 import org.jboss.errai.demos.cdi.lite.beans.WelcomeService;
 import org.jboss.errai.demos.cdi.lite.container.CdiLiteContainer;
+import org.jboss.errai.demos.cdi.lite.todolist.TodoListApp;
 
 import static org.jboss.errai.common.configuration.Target.JAVA;
 
@@ -35,11 +36,11 @@ public class Main {
 
     final CdiLiteContainer container = new CdiLiteContainer();
 
-    final WelcomeService welcomeService = container.getBeanManager()
-                                                   .lookupBean(WelcomeService.class)
-                                                   .getInstance();
-
+    final WelcomeService welcomeService = container.getBeanManager().lookupBean(WelcomeService.class).getInstance();
     welcomeService.printWelcomeMessages();
+
+    final TodoListApp todoListApp = container.getBeanManager().lookupBean(TodoListApp.class).getInstance();
+    todoListApp.start();
   }
 
 }
