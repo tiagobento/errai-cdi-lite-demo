@@ -55,16 +55,11 @@ public class WelcomeService {
 
   public void printWelcomeMessages() {
     System.out.println("Hello from CDI-Lite managed bean!");
-    System.out.println();
-
     System.out.println("Public " + decapitalize(publicMessage.text()));
     System.out.println("Private " + decapitalize(privateMessage.text()));
-    System.out.println();
-
     System.out.println(messageWithQualifier1.text());
     System.out.println(messageWithQualifier2.text());
     System.out.println(stringMessage);
-    System.out.println();
   }
 
 }
