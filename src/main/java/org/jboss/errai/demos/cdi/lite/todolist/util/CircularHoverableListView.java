@@ -37,7 +37,7 @@ public abstract class CircularHoverableListView<T extends ListItem<?>> implement
   }
 
   @PostConstruct
-  public void circularHoverableListViewInit() {
+  public void initCircularHoverableListView() {
     i = 0;
   }
 
@@ -48,9 +48,9 @@ public abstract class CircularHoverableListView<T extends ListItem<?>> implement
 
   private String render(final T item) {
     if (isHovered(item)) {
-      return item.render() + " <-";
+      return "- " + item.render() + " <-";
     } else {
-      return item.render();
+      return "- " + item.render();
     }
   }
 
@@ -66,6 +66,10 @@ public abstract class CircularHoverableListView<T extends ListItem<?>> implement
     case 's': onDownArrowPressed();
       break;
     }
+  }
+
+  private int lastIndex() {
+    return items.size() - 1;
   }
 
   private void onDownArrowPressed() {
@@ -88,17 +92,12 @@ public abstract class CircularHoverableListView<T extends ListItem<?>> implement
     }
   }
 
-  protected int getHoveredItemIndex() {
-    return i;
-  }
-
   protected void moveHoveredItemUp() {
     if (i == 0) {
       return;
     }
 
-
-    final T aux = items.get(i);
+    final T aux = getHoveredItem();
     items.remove(i);
     items.add(--i, aux);
   }
@@ -108,7 +107,7 @@ public abstract class CircularHoverableListView<T extends ListItem<?>> implement
       return;
     }
 
-    final T aux = items.get(i);
+    final T aux = getHoveredItem();
     items.remove(i);
     items.add(++i, aux);
   }
@@ -123,7 +122,7 @@ public abstract class CircularHoverableListView<T extends ListItem<?>> implement
     i = lastIndex();
   }
 
-  private int lastIndex() {
-    return items.size() - 1;
+  protected T getHoveredItem() {
+    return items.get(i);
   }
 }

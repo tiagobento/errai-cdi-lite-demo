@@ -16,9 +16,6 @@
 
 package org.jboss.errai.demos.cdi.lite.todolist.model;
 
-import org.jboss.errai.demos.cdi.lite.todolist.textual.KeyListener;
-import org.jboss.errai.demos.cdi.lite.todolist.textual.KeyPressSensitive;
-
 import javax.annotation.PostConstruct;
 import java.util.Stack;
 
@@ -40,7 +37,7 @@ public abstract class Display implements KeyPressSensitive {
     this.subscribeTo(keyListener);
   }
 
-  protected abstract void refresh();
+  public abstract void refresh();
 
   public void setActiveView(final View activeView) {
     viewStack.push(activeView);

@@ -14,37 +14,34 @@
  * limitations under the License.
  */
 
-package org.jboss.errai.demos.cdi.lite.todolist.textual;
+package org.jboss.errai.demos.cdi.lite.todolist.exit;
 
-import org.jboss.errai.demos.cdi.lite.todolist.model.Display;
+import org.jboss.errai.demos.cdi.lite.todolist.model.KeyListener;
 import org.jboss.errai.demos.cdi.lite.todolist.model.View;
-import org.jboss.errai.demos.cdi.lite.todolist.textual.KeyListener;
-import org.jboss.errai.demos.cdi.lite.todolist.textual.KeyPressSensitive;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import java.util.Stack;
 
 /**
  * @author Tiago Bento <tfernand@redhat.com>
  */
-@ApplicationScoped
-public class TextualDisplay extends Display {
+public class ByeByeView implements View {
+
+  private final KeyListener keyListener;
 
   @Inject
-  public TextualDisplay(final KeyListener keyListener) {
-    super(keyListener);
+  public ByeByeView(final KeyListener keyListener) {
+    this.keyListener = keyListener;
   }
 
   @Override
-  public void refresh() {
-    System.out.print("\033[H\033[2J");
-    System.out.flush();
+  public String render() {
+    return "Thanks for using Errai CDI-Lite to-do list app!\n\nPress [q] to exit";
+  }
 
-    if (userCanGoBack()) {
-      System.out.println("Press [b] to go back\n");
+  @Override
+  public void onKeyPressed(final char key) {
+    if (key == 'q') {
+      keyListener.stop();
     }
-
-    System.out.println(getCurrentView().render());
   }
 }

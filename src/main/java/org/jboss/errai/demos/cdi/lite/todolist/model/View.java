@@ -16,8 +16,6 @@
 
 package org.jboss.errai.demos.cdi.lite.todolist.model;
 
-import org.jboss.errai.demos.cdi.lite.todolist.textual.KeyPressSensitive;
-
 /**
  * @author Tiago Bento <tfernand@redhat.com>
  */

@@ -35,7 +35,7 @@ public abstract class ListItem<T> implements View {
     return label;
   }
 
-  public T getObject() {
+  protected T getObject() {
     return object;
   }
 }
