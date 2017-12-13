@@ -24,7 +24,7 @@ import org.jboss.errai.demos.cdi.lite.todolist.util.ListItem;
  */
 public class MenuItem extends ListItem<View> {
 
-  MenuItem(final String label, final View view) {
+  public MenuItem(final String label, final View view) {
     super(label, view);
   }
 

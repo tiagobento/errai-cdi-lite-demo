@@ -23,6 +23,7 @@ import org.jboss.errai.common.configuration.ErraiApp;
 import org.jboss.errai.common.configuration.ErraiModule;
 import org.jboss.errai.common.configuration.Target;
 import org.jboss.errai.demos.cdi.lite.todolist.app.TodoListApp;
+import org.jboss.errai.demos.cdi.lite.todolist.menu.MainMenuItemsProducer;
 import org.jboss.errai.ioc.client.api.EntryPoint;
 
 import javax.annotation.PostConstruct;
@@ -33,7 +34,7 @@ import javax.inject.Named;
  * @author Tiago Bento <tfernand@redhat.com>
  */
 @EntryPoint
-@ErraiModule
+@ErraiModule(iocAlternatives = MainMenuItemsProducer.class)
 @ErraiApp(gwtModuleName = "org.jboss.errai.demos.cdi.lite.todolist.GwtBrowserTodoListApp", target = Target.GWT)
 public class GwtBrowserErraiApp {
 

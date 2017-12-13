@@ -146,4 +146,8 @@ public abstract class CircularHoverableListView<T extends ListItem<?>> implement
     items.remove(item);
   }
 
+  protected int getSize() {
+    return items.size();
+  }
+
 }

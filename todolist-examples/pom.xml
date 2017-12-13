@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <name>Errai CDI-Lite Demo :: To-do List :: Java</name>
-    <artifactId>todolist-java</artifactId>
+    <name>Errai CDI-Lite Demo :: To-do List :: Examples</name>
+    <artifactId>todolist-examples</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
@@ -22,25 +22,8 @@
         </dependency>
 
         <dependency>
-            <groupId>org.jboss.errai</groupId>
-            <artifactId>todolist-examples</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
-        </dependency>
-
-        <!-- Unwanted dependency. Here to solve coupling of errai-ioc with GWT -->
-        <dependency>
-            <groupId>com.google.gwt</groupId>
-            <artifactId>gwt-dev</artifactId>
-        </dependency>
-
-        <!-- Unwanted dependency. Here to solve coupling of errai-ioc with GWT -->
-        <dependency>
-            <groupId>com.google.gwt</groupId>
-            <artifactId>gwt-user</artifactId>
         </dependency>
     </dependencies>
 

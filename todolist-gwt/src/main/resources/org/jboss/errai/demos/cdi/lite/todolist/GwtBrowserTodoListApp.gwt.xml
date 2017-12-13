@@ -1,7 +1,7 @@
 <module rename-to="app">
 
-    <inherits name="com.google.gwt.user.User"/>
     <inherits name="org.jboss.errai.demos.cdi.lite.todolist.TodoListCore"/>
+    <inherits name="org.jboss.errai.demos.cdi.lite.todolist.TodoListExamples"/>
 
     <source path="gwt"/>
 

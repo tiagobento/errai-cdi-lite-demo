@@ -36,6 +36,7 @@ public class Main {
     final CdiLiteContainer container = new CdiLiteContainer();
 
     final WelcomeService welcomeService = container.getBeanManager().lookupBean(WelcomeService.class).getInstance();
+
     welcomeService.printWelcomeMessages();
   }
 

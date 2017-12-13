@@ -14,25 +14,38 @@
  * limitations under the License.
  */
 
-package org.jboss.errai.demos.cdi.lite.todolist.menu;
+package org.jboss.errai.demos.cdi.lite.todolist.examples;
 
 import org.jboss.errai.common.client.api.annotations.IOCProducer;
 import org.jboss.errai.demos.cdi.lite.todolist.exit.ByeByeView;
+import org.jboss.errai.demos.cdi.lite.todolist.menu.MainMenu;
+import org.jboss.errai.demos.cdi.lite.todolist.menu.MenuItem;
+import org.jboss.errai.demos.cdi.lite.todolist.todolist.TodoListView;
 import org.jboss.errai.demos.cdi.lite.todolist.util.ListItems;
 
 import javax.enterprise.inject.Alternative;
 import javax.enterprise.inject.Produces;
+import javax.inject.Named;
 
 /**
  * @author Tiago Bento <tfernand@redhat.com>
  */
 @Alternative
-public class MainMenuItemsProducer {
+public class MainMenuItemsWithExamplesProducer {
 
   @Produces
   @IOCProducer
   @MainMenu
-  public static ListItems mainMenuItems(final ByeByeView byeByeView) {
-    return new ListItems<>(new MenuItem("Exit", byeByeView));
+  public static ListItems mainMenuItems(final @Named("todoListViewExample1") TodoListView todoListView1,
+          final @Named("todoListViewExample2") TodoListView todoListView2,
+          final ByeByeView byeByeView) {
+
+    return new ListItems<>(
+
+            new MenuItem("To-do list slot 1 [example]", todoListView1),
+
+            new MenuItem("To-do list slot 2 [example]", todoListView2),
+
+            new MenuItem("Exit", byeByeView));
   }
 }

@@ -14,26 +14,13 @@
  * limitations under the License.
  */
 
-package org.jboss.errai.demos.cdi.lite.todolist.gwt;
+package org.jboss.errai.demos.cdi.lite.todolist;
 
-import elemental2.dom.DomGlobal;
-import elemental2.dom.HTMLDivElement;
-import org.jboss.errai.common.client.api.annotations.IOCProducer;
-
-import javax.enterprise.inject.Produces;
-import javax.inject.Named;
+import org.jboss.errai.common.configuration.ErraiModule;
 
 /**
  * @author Tiago Bento <tfernand@redhat.com>
  */
-public class DisplayDivProducer {
-
-  private static final HTMLDivElement displayDiv = (HTMLDivElement) DomGlobal.document.createElement("div");
-
-  @IOCProducer
-  @Produces
-  @Named("display")
-  public static HTMLDivElement displayDiv() {
-    return displayDiv;
-  }
+@ErraiModule
+public class TodoListExamplesModule {
 }
