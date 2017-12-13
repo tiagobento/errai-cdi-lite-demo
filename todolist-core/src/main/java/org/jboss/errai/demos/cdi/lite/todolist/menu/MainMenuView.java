@@ -23,6 +23,7 @@ import org.jboss.errai.demos.cdi.lite.todolist.util.ListItems;
 import org.jboss.errai.ioc.client.api.ManagedInstance;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  * @author Tiago Bento <tfernand@redhat.com>
@@ -32,6 +33,7 @@ public class MainMenuView extends CircularHoverableListView<MenuItem> {
   private final Display display;
 
   @Inject
+  @Named("empty")
   public ManagedInstance<TodoListView> todoListViewManagedInstance;
 
   @Inject
@@ -48,7 +50,7 @@ public class MainMenuView extends CircularHoverableListView<MenuItem> {
     case '\n': onEnterPressed();
       break;
     case 'a':
-      add(new MenuItem("New to-do list", todoListViewManagedInstance.get()));
+      add(new MenuItem("To-do list slot " + getSize(), todoListViewManagedInstance.get()));
       break;
     }
   }
@@ -73,6 +75,6 @@ public class MainMenuView extends CircularHoverableListView<MenuItem> {
 
   @Override
   protected String menu() {
-    return super.menu() + "Press [Enter] to select an option.";
+    return super.menu() + "Press [Enter] to select an option.\nPress [a] to add a new slot.";
   }
 }

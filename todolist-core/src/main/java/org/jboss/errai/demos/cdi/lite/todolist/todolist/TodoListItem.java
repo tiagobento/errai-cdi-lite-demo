@@ -24,7 +24,7 @@ import org.jboss.errai.demos.cdi.lite.todolist.util.ListItem;
  */
 public class TodoListItem extends ListItem<TodoListItem.Status> {
 
-  TodoListItem(final String label, final Status status) {
+  public TodoListItem(final String label, final Status status) {
     super(label, status);
   }
 

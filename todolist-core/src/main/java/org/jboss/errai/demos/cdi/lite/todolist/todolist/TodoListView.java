@@ -21,6 +21,7 @@ import org.jboss.errai.demos.cdi.lite.todolist.util.ListItems;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.Dependent;
+import javax.inject.Named;
 
 import static org.jboss.errai.demos.cdi.lite.todolist.todolist.TodoListItem.Status.COMPLETED;
 import static org.jboss.errai.demos.cdi.lite.todolist.todolist.TodoListItem.Status.TODO;
@@ -32,6 +33,7 @@ import static org.jboss.errai.demos.cdi.lite.todolist.todolist.TodoListView.Mode
  * @author Tiago Bento <tfernand@redhat.com>
  */
 @Dependent
+@Named("empty")
 public class TodoListView extends CircularHoverableListView<TodoListItem> {
 
   private Mode mode;

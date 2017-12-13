@@ -20,6 +20,7 @@ import org.jboss.errai.common.configuration.ErraiApp;
 import org.jboss.errai.common.configuration.ErraiModule;
 import org.jboss.errai.demos.cdi.lite.container.CdiLiteContainer;
 import org.jboss.errai.demos.cdi.lite.todolist.app.TodoListApp;
+import org.jboss.errai.demos.cdi.lite.todolist.examples.MainMenuItemsWithExamplesProducer;
 
 import static org.jboss.errai.common.configuration.Target.JAVA;
 
@@ -27,7 +28,7 @@ import static org.jboss.errai.common.configuration.Target.JAVA;
  * @author Tiago Bento <tfernand@redhat.com>
  */
 
-@ErraiModule
+@ErraiModule(iocAlternatives = MainMenuItemsWithExamplesProducer.class)
 @ErraiApp(gwtModuleName = "", target = JAVA)
 public class Main {
 
@@ -36,6 +37,7 @@ public class Main {
     final CdiLiteContainer container = new CdiLiteContainer();
 
     final TodoListApp todoListApp = container.getBeanManager().lookupBean(TodoListApp.class).getInstance();
+
     todoListApp.start();
   }
 

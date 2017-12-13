@@ -1,0 +1,7 @@
+<module>
+
+    <inherits name="org.jboss.errai.demos.cdi.lite.todolist.TodoListCore" />
+
+    <source path="examples"/>
+
+</module>
