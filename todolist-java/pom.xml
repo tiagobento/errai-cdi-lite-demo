@@ -15,82 +15,28 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <url>http://erraiframework.org</url>
-
-    <licenses>
-        <license>
-            <name>The Apache Software License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
-
-    <description>
-        Errai CDI-Lite Demo is an example Java SE application that uses Errai as its dependency injection framework.
-    </description>
-
-    <properties>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-    </properties>
-
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.jboss.errai.bom</groupId>
-                <artifactId>errai-internal-bom</artifactId>
-                <version>4.1.2-SNAPSHOT</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
-
     <dependencies>
-
         <dependency>
             <groupId>org.jboss.errai</groupId>
             <artifactId>todolist-core</artifactId>
-            <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
-            <version>1.7.7</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jboss.errai</groupId>
-            <artifactId>errai-ioc</artifactId>
         </dependency>
 
         <!-- Unwanted dependency. Here to solve coupling of errai-ioc with GWT -->
         <dependency>
             <groupId>com.google.gwt</groupId>
             <artifactId>gwt-dev</artifactId>
-            <version>2.8.2</version>
         </dependency>
 
         <!-- Unwanted dependency. Here to solve coupling of errai-ioc with GWT -->
         <dependency>
             <groupId>com.google.gwt</groupId>
             <artifactId>gwt-user</artifactId>
-            <version>2.8.2</version>
         </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.6.2</version>
-            </plugin>
-        </plugins>
-    </build>
-
 
 </project>

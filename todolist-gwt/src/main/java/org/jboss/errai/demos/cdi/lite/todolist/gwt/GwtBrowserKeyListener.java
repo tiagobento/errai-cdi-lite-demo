@@ -44,7 +44,7 @@ public class GwtBrowserKeyListener extends KeyListener {
   private char keyOf(final KeyboardEvent keyboardEvent) {
     final String key = keyboardEvent.key;
     switch (key) {
-    case "Esc":
+    case "Escape":
       return '\u001B';
     case "Enter":
       return '\n';
