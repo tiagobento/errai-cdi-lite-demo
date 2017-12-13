@@ -27,7 +27,7 @@ Running on the terminal
     
 1. Run the Main class.
 
-    `mvn exec:java -Dexec.mainClass="org.jboss.errai.demos.cdi.lite.Main" -pl todolist-java -Dapt-generators`
+    `mvn clean install exec:java -Dexec.mainClass="org.jboss.errai.demos.cdi.lite.Main" -pl todolist-java -Dapt-generators`
     
 Running on the browser
 ---
