@@ -83,6 +83,7 @@
                                 <include>.errai/</include>
                                 <include>src/main/webapp/app/</include>
                                 <include>src/main/webapp/WEB-INF/classes/</include>
+                                <include>src/main/webapp/WEB-INF/deploy/</include>
                                 <include>src/main/webapp/WEB-INF/lib/</include>
                                 <include>src/main/gwt-unitCache</include>
                             </includes>
