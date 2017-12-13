@@ -14,29 +14,13 @@
  * limitations under the License.
  */
 
-package org.jboss.errai.demos.cdi.lite;
+package org.jboss.errai.demos.cdi.lite.todolist;
 
-import org.jboss.errai.common.configuration.ErraiApp;
 import org.jboss.errai.common.configuration.ErraiModule;
-import org.jboss.errai.demos.cdi.lite.container.CdiLiteContainer;
-import org.jboss.errai.demos.cdi.lite.todolist.app.TodoListApp;
-
-import static org.jboss.errai.common.configuration.Target.JAVA;
 
 /**
  * @author Tiago Bento <tfernand@redhat.com>
  */
-
 @ErraiModule
-@ErraiApp(gwtModuleName = "", target = JAVA)
-public class Main {
-
-  public static void main(final String[] args) {
-
-    final CdiLiteContainer container = new CdiLiteContainer();
-
-    final TodoListApp todoListApp = container.getBeanManager().lookupBean(TodoListApp.class).getInstance();
-    todoListApp.start();
-  }
-
+public class TodoListCoreModule {
 }

@@ -14,29 +14,39 @@
  * limitations under the License.
  */
 
-package org.jboss.errai.demos.cdi.lite;
+package org.jboss.errai.demos.cdi.lite.todolist.gwt;
 
+import elemental2.dom.DomGlobal;
+import elemental2.dom.HTMLDivElement;
+import org.eclipse.jetty.util.annotation.Name;
 import org.jboss.errai.common.configuration.ErraiApp;
 import org.jboss.errai.common.configuration.ErraiModule;
-import org.jboss.errai.demos.cdi.lite.container.CdiLiteContainer;
+import org.jboss.errai.common.configuration.Target;
 import org.jboss.errai.demos.cdi.lite.todolist.app.TodoListApp;
+import org.jboss.errai.ioc.client.api.EntryPoint;
 
-import static org.jboss.errai.common.configuration.Target.JAVA;
+import javax.annotation.PostConstruct;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  * @author Tiago Bento <tfernand@redhat.com>
  */
-
+@EntryPoint
 @ErraiModule
-@ErraiApp(gwtModuleName = "", target = JAVA)
-public class Main {
+@ErraiApp(gwtModuleName = "org.jboss.errai.demos.cdi.lite.todolist.GwtBrowserTodoListApp", target = Target.GWT)
+public class GwtBrowserErraiApp {
 
-  public static void main(final String[] args) {
+  @Inject
+  @Named("display")
+  private HTMLDivElement displayDiv;
 
-    final CdiLiteContainer container = new CdiLiteContainer();
+  @Inject
+  public TodoListApp todoListApp;
 
-    final TodoListApp todoListApp = container.getBeanManager().lookupBean(TodoListApp.class).getInstance();
+  @PostConstruct
+  public void onModuleLoad() {
     todoListApp.start();
+    DomGlobal.document.body.appendChild(displayDiv);
   }
-
 }

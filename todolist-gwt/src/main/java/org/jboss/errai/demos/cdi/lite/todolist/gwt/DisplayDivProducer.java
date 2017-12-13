@@ -14,29 +14,28 @@
  * limitations under the License.
  */
 
-package org.jboss.errai.demos.cdi.lite;
+package org.jboss.errai.demos.cdi.lite.todolist.gwt;
 
-import org.jboss.errai.common.configuration.ErraiApp;
-import org.jboss.errai.common.configuration.ErraiModule;
-import org.jboss.errai.demos.cdi.lite.container.CdiLiteContainer;
-import org.jboss.errai.demos.cdi.lite.todolist.app.TodoListApp;
+import elemental2.dom.DomGlobal;
+import elemental2.dom.HTMLDivElement;
+import org.jboss.errai.common.client.api.annotations.IOCProducer;
 
-import static org.jboss.errai.common.configuration.Target.JAVA;
+import javax.inject.Named;
 
 /**
  * @author Tiago Bento <tfernand@redhat.com>
  */
+public class DisplayDivProducer {
 
-@ErraiModule
-@ErraiApp(gwtModuleName = "", target = JAVA)
-public class Main {
+  private static final HTMLDivElement displayDiv;
 
-  public static void main(final String[] args) {
-
-    final CdiLiteContainer container = new CdiLiteContainer();
-
-    final TodoListApp todoListApp = container.getBeanManager().lookupBean(TodoListApp.class).getInstance();
-    todoListApp.start();
+  static {
+    displayDiv = (HTMLDivElement) DomGlobal.document.createElement("div");
   }
 
+  @IOCProducer
+  @Named("display")
+  public static HTMLDivElement displayDiv() {
+    return displayDiv;
+  }
 }
