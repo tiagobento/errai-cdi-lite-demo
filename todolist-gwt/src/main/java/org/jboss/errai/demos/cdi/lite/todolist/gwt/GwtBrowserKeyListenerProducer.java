@@ -14,29 +14,20 @@
  * limitations under the License.
  */
 
-package org.jboss.errai.demos.cdi.lite;
+package org.jboss.errai.demos.cdi.lite.todolist.gwt;
 
-import org.jboss.errai.common.configuration.ErraiApp;
-import org.jboss.errai.common.configuration.ErraiModule;
-import org.jboss.errai.demos.cdi.lite.container.CdiLiteContainer;
-import org.jboss.errai.demos.cdi.lite.todolist.app.TodoListApp;
-
-import static org.jboss.errai.common.configuration.Target.JAVA;
+import org.jboss.errai.common.client.api.annotations.IOCProducer;
+import org.jboss.errai.demos.cdi.lite.todolist.model.KeyListener;
 
 /**
  * @author Tiago Bento <tfernand@redhat.com>
  */
+public class GwtBrowserKeyListenerProducer {
 
-@ErraiModule
-@ErraiApp(gwtModuleName = "", target = JAVA)
-public class Main {
+  private static final KeyListener keyListener = new GwtBrowserKeyListener();
 
-  public static void main(final String[] args) {
-
-    final CdiLiteContainer container = new CdiLiteContainer();
-
-    final TodoListApp todoListApp = container.getBeanManager().lookupBean(TodoListApp.class).getInstance();
-    todoListApp.start();
+  @IOCProducer
+  public static KeyListener keyListener() {
+    return keyListener;
   }
-
 }

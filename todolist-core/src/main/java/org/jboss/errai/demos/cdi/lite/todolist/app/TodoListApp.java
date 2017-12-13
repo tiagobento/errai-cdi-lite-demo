@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.jboss.errai.demos.cdi.lite.todolist;
+package org.jboss.errai.demos.cdi.lite.todolist.app;
 
 import org.jboss.errai.common.configuration.ErraiModule;
 import org.jboss.errai.demos.cdi.lite.todolist.home.HomeView;
@@ -29,7 +29,6 @@ import javax.inject.Inject;
  * @author Tiago Bento <tfernand@redhat.com>
  */
 @Dependent
-@ErraiModule
 public class TodoListApp {
 
   private final Display display;

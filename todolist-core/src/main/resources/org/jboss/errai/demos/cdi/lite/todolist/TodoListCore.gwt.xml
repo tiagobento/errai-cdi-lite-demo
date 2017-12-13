@@ -1,0 +1,13 @@
+<module>
+
+    <inherits name="org.jboss.errai.ioc.Container" />
+
+    <source path="exit"/>
+    <source path="home"/>
+    <source path="menu"/>
+    <source path="model"/>
+    <source path="todolist"/>
+    <source path="util"/>
+    <source path="app"/>
+
+</module>
