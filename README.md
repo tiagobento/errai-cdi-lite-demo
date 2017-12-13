@@ -20,14 +20,14 @@ Before running..
     
     `git clone https://github.com/tiagobento/errai-cdi-lite-demo`
     
-    `mvn clean install -Dapt-generators -Dgwt.compiler.skip`
+    `mvn clean install -Dgwt.compiler.skip`
 
 Running on the terminal
 ---
     
 1. Run the Main class.
 
-    `mvn exec:java -Dexec.mainClass="org.jboss.errai.demos.cdi.lite.Main" -pl todolist-java`
+    `mvn exec:java -Dexec.mainClass="org.jboss.errai.demos.cdi.lite.Main" -pl todolist-java -Dapt-generators`
     
 Running on the browser
 ---
