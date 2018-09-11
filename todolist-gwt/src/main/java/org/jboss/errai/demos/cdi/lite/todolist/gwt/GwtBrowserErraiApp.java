@@ -18,10 +18,9 @@ package org.jboss.errai.demos.cdi.lite.todolist.gwt;
 
 import elemental2.dom.DomGlobal;
 import elemental2.dom.HTMLDivElement;
-import org.eclipse.jetty.util.annotation.Name;
-import org.jboss.errai.common.configuration.ErraiApp;
-import org.jboss.errai.common.configuration.ErraiModule;
-import org.jboss.errai.common.configuration.Target;
+import org.jboss.errai.config.apt.api.ErraiApp;
+import org.jboss.errai.config.apt.api.ErraiModule;
+import org.jboss.errai.config.apt.api.Target;
 import org.jboss.errai.demos.cdi.lite.todolist.app.TodoListApp;
 import org.jboss.errai.demos.cdi.lite.todolist.menu.MainMenuItemsProducer;
 import org.jboss.errai.ioc.client.api.EntryPoint;

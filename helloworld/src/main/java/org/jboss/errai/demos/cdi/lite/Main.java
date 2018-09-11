@@ -16,12 +16,12 @@
 
 package org.jboss.errai.demos.cdi.lite;
 
-import org.jboss.errai.common.configuration.ErraiApp;
-import org.jboss.errai.common.configuration.ErraiModule;
+import org.jboss.errai.config.apt.api.ErraiApp;
+import org.jboss.errai.config.apt.api.ErraiModule;
 import org.jboss.errai.demos.cdi.lite.beans.WelcomeService;
 import org.jboss.errai.demos.cdi.lite.container.CdiLiteContainer;
 
-import static org.jboss.errai.common.configuration.Target.JAVA;
+import static org.jboss.errai.config.apt.api.Target.JAVA;
 
 /**
  * @author Tiago Bento <tfernand@redhat.com>

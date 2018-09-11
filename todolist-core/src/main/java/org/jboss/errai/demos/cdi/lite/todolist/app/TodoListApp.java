@@ -16,7 +16,7 @@
 
 package org.jboss.errai.demos.cdi.lite.todolist.app;
 
-import org.jboss.errai.common.configuration.ErraiModule;
+import org.jboss.errai.config.apt.api.ErraiModule;
 import org.jboss.errai.demos.cdi.lite.todolist.home.HomeView;
 import org.jboss.errai.demos.cdi.lite.todolist.model.Display;
 import org.jboss.errai.demos.cdi.lite.todolist.model.KeyListener;
