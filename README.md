@@ -5,6 +5,8 @@ This is a demo To-do list application that uses Errai as its dependency injectio
 
 > **NOTE:** This is a very early stage development demo. Many of the IOC/CDI features might not work as expected.
 
+**NOTE: Java 8 is required!**
+
 Before running..
 --
 
@@ -34,13 +36,13 @@ Running on the browser
 
 1. Either with new Errai APT generators.
 
-    `mvn clean gwt:run -pl todolist-gwt -Dapt-generators`
-    `open localhost:8888/`
+    - `mvn clean gwt:run -pl todolist-gwt -Dapt-generators`
+    - Open http://localhost:8888
     
 2. Or with classical GWT generators.
 
-    `mvn clean gwt:run -pl todolist-gwt`
-    `open localhost:8888/`    
+    - `mvn clean gwt:run -pl todolist-gwt`
+    - Open http://localhost:8888 
     
     
     
