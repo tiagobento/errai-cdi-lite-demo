@@ -37,6 +37,7 @@
         <module>todolist-examples</module>
         <module>todolist-java</module>
         <module>todolist-gwt</module>
+        <module>todolist-j2cl</module>
     </modules>
 
     <dependencyManagement>
